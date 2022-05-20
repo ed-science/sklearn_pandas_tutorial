@@ -87,7 +87,7 @@ def run_cell(shell, iopub, cell, timeout=300):
             out.evalue = content['evalue']
             out.traceback = content['traceback']
         else:
-            print("unhandled iopub msg: %s" % msg_type)
+            print(f"unhandled iopub msg: {msg_type}")
 
         outs.append(out)
     return outs, failed
@@ -126,7 +126,7 @@ def run_notebook(nb):
             sys.stdout.write('.')
 
     print()
-    print("ran notebook %s" % nb.metadata.name)
+    print(f"ran notebook {nb.metadata.name}")
     print("    ran %3i cells" % cells)
     if failures:
         print("    %3i cells raised exceptions" % failures)
@@ -136,7 +136,7 @@ def run_notebook(nb):
 
 
 def process_notebook_file(fname, action='clean', output_fname=None):
-    print("Performing '{}' on: {}".format(action, fname))
+    print(f"Performing '{action}' on: {fname}")
     orig_wd = os.getcwd()
     with io.open(fname, 'r') as f:
         nb = current.read(f, 'json')
